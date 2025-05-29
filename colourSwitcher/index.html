@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <style>
+      .color {
+        margin: 5px;
+      }
+      #red {
+        background-color: red;
+        height: 100px;
+        width: 100px;
+        border: solid black 2px;
+      }
+      #yellow {
+        background-color: yellow;
+        height: 100px;
+        width: 100px;
+        border: solid black 2px;
+      }
+      #green {
+        background-color: green;
+        height: 100px;
+        width: 100px;
+        border: solid black 2px;
+      }
+      #blue {
+        background-color: blue;
+        height: 100px;
+        width: 100px;
+        border: solid black 2px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 17rem;
+    "
+  >
+    <button class="color" id="red"></button>
+    <button class="color" id="yellow"></button>
+    <button class="color" id="green"></button>
+    <button class="color" id="blue"></button>
+  </body>
+  <script>
+    const boujee = document.querySelectorAll(".color");
+    boujee.forEach((color) => {
+      color.addEventListener("click", (e) => {
+        const selectbody = document.querySelector("body");
+        selectbody.style.backgroundColor = e.target.id;
+      });
+    });
+  </script>
+</html>
