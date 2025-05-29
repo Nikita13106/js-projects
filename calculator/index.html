@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="container">
+      <table>
+        <tr>
+          <td colspan="3"><input type="text" id="text" readonly /></td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              class="box"
+              id="clear"
+              onclick="let clear=``;
+              document.getElementById(`text`).value = clear;
+              console.log(clear);
+              button=``;
+              "
+            >
+              AC
+            </button>
+          </td>
+          <td><button class="box" onclick="print(`+`)">+</button></td>
+          <td>
+            <button
+              class="box"
+              id="equal"
+              onclick="document.getElementById(`text`).value=eval(button);
+              console.log(eval(button)); "
+            >
+              =
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td><button class="box" onclick="print(`%`)">%</button></td>
+          <td><button class="box" onclick="print(`*`)">x</button></td>
+          <td><button class="box" onclick="print(`-`)">-</button></td>
+        </tr>
+        <tr>
+          <td><button class="box" onclick="print(`.`)">.</button></td>
+          <td><button class="box" onclick="print(`/`)">÷</button></td>
+          <td><button class="box" onclick="print(`0`)">0</button></td>
+        </tr>
+        <tr>
+          <td><button class="box" onclick="print(`1`)">1</button></td>
+          <td><button class="box" onclick="print(`2`)">2</button></td>
+          <td><button class="box" onclick="print(`3`)">3</button></td>
+        </tr>
+        <tr>
+          <td><button class="box" onclick="print(`4`)">4</button></td>
+          <td><button class="box" onclick="print(`5`)">5</button></td>
+          <td><button class="box" onclick="print(`6`)">6</button></td>
+        </tr>
+        <tr>
+          <td><button class="box" onclick="print(`7`)">7</button></td>
+          <td><button class="box" onclick="print(`8`)">8</button></td>
+          <td><button class="box" onclick="print(`9`)">9</button></td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      let button = "";
+      function print(operator) {
+        button += operator;
+        document.getElementById("text").value = button;
+        console.log(button);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="any.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>DID YOU COMPLETE YOUR TODAY'S TASK?</h1>
+      <br />
+      <button id="first" class="button">Yes</button>
+      <button id="second" class="button">No</button>
+    </div>
+    <script>
+      let a = 0;
+      let count;
+      document.getElementById("first").onclick = function () {
+        a += 1;
+        alert(`WELL DONE! YOU COMPLETED YOUR ${a} DAY'S TASK`);
+      };
+      document.getElementById("second").onclick = function () {
+        a = 0;
+        alert("OH NO! YOU FAILED TO COMPLETE YOUR TODAY'S TASK");
+      };
+    </script>
+  </body>
+</html>
