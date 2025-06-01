@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number guessing game</title>
+    <style>
+      button {
+        background-color: black;
+        color: white;
+        height: 25px;
+        width: 110px;
+        border-radius: 5px;
+        padding: 4px;
+      }
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 50px;
+        border: solid rgb(206, 130, 191) 2px;
+        margin-left: 500px;
+        margin-right: 500px;
+        box-shadow: 0px 0px 20px 10px rgb(141, 141, 179);
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      p {
+        color: brown;
+      }
+      input {
+        background-color: antiquewhite;
+        border-radius: 15px;
+        height: 25px;
+        width: 190px;
+      }
+      button:hover {
+        background-color: orange;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Number Guessing Game</h2>
+      <p>Try and guess a random number between 1 and 100</p>
+      <p>You have 10 attempts to guess the right number.</p>
+      <form>
+        <label for="box"><h1>Guess a Number</h1></label>
+        <input type="text" id="box" required /><br />
+        <button>Submit guess</button>
+      </form>
+      <div id="results">
+        <p>Previous guesses : <span id="guesses"></span></p>
+        <p>Guesses remaining : <span id="remaining">10</span></p>
+        <p id="hiOrLow"></p>
+        <p id="p"></p>
+        <br /><br />
+      </div>
+    </div>
+  </body>
+  <script>
+    const randomNumber = parseInt(Math.random() * 100 + 1);
+
+    const box = document.querySelector("#box");
+    const form = document.querySelector("form");
+    const guesses = document.querySelector("#guesses");
+    const remaining = document.querySelector("#remaining");
+    const hiOrLow = document.querySelector("#hiOrLow");
+    const startOver = document.querySelector("#results");
+    const p = document.querySelector("#p");
+    let totalguess = 0;
+
+    let playgame = true;
+    if (playgame) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const guess = parseInt(box.value);
+        checking(guess);
+      });
+    }
+    function checking(guess) {
+      if (isNaN(guess)) {
+        alert("Please enter a number");
+      } else if (guess < 1 || guess > 100) {
+        alert("Please enter a number between 1 and 100");
+      }
+      if (remaining.textContent === 0) {
+        clear(guess);
+        display(`Game Over.Random number was ${randomNumber}`);
+        end();
+      } else {
+        rightOrWrong(guess);
+        clear(guess);
+      }
+    }
+
+    function display(message) {
+      hiOrLow.textContent = `${message}`;
+    }
+    function rightOrWrong(guess) {
+      if (guess === randomNumber) {
+        display(`You guessed it right`);
+        end();
+      } else if (guess < randomNumber) {
+        display(`Your guess is too low`);
+      } else {
+        display(`Your guess is too high`);
+      }
+    }
+    function clear(guess) {
+      box.value = "";
+      if (remaining.textContent > 0) {
+        guesses.textContent += `${guess}, `;
+        remaining.textContent--;
+        totalguess++;
+        // } else if (remaining.textContent === 0) {
+        //   clear(guess);
+        //   display(`Game Over.Random number was ${randomNumber}`);
+        //   end();
+        // }
+      }
+      if (totalguess === 10) {
+        display(`Game Over. Random number was ${randomNumber}`);
+        end();
+      }
+    }
+
+    function end() {
+      box.value = "";
+      box.setAttribute("disabled", "");
+      p.innerHTML = "<button >Start over</button>";
+      playgame = false;
+      start();
+    }
+    function start() {
+      startOver.addEventListener("click", function () {
+        playgame = true;
+        guesses.textContent = "";
+        guess = "";
+        totalguess = 1;
+        remaining.textContent = 10;
+        box.removeAttribute("disabled");
+        p.textContent = "";
+        hiOrLow.textContent = "";
+      });
+    }
+  </script>
+</html>
