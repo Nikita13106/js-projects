@@ -89,11 +89,6 @@
         alert("Please enter a number");
       } else if (guess < 1 || guess > 100) {
         alert("Please enter a number between 1 and 100");
-      }
-      if (remaining.textContent === 0) {
-        clear(guess);
-        display(`Game Over.Random number was ${randomNumber}`);
-        end();
       } else {
         rightOrWrong(guess);
         clear(guess);
@@ -105,7 +100,7 @@
     }
     function rightOrWrong(guess) {
       if (guess === randomNumber) {
-        display(`You guessed it right`);
+        display(` Congrats!! You guessed it right`);
         end();
       } else if (guess < randomNumber) {
         display(`Your guess is too low`);
@@ -119,11 +114,6 @@
         guesses.textContent += `${guess}, `;
         remaining.textContent--;
         totalguess++;
-        // } else if (remaining.textContent === 0) {
-        //   clear(guess);
-        //   display(`Game Over.Random number was ${randomNumber}`);
-        //   end();
-        // }
       }
       if (totalguess === 10) {
         display(`Game Over. Random number was ${randomNumber}`);
