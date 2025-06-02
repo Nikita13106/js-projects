@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard check</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: aliceblue;
+        margin-top: 150px;
+      }
+      table,
+      th,
+      td {
+        border: 2px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="text">
+        <h2>Press any key and it will tell you which key you pressed</h2>
+      </div>
+      <div id="magic"></div>
+    </div>
+  </body>
+  <script>
+    const table = document.querySelector("#magic");
+    window.addEventListener("keydown", function (e) {
+      table.innerHTML = `<div class="color">
+        <table>
+          <tr>
+            <th> KEY </th>
+            <th> KEYCODE </th>
+            <th> CODE </th>
+          </tr>
+          <tr>
+            <td> ${e.key === " " ? "Space" : e.key}</td>
+            <td>${e.keyCode}</td>
+            <td>${e.code}</td>
+          </tr>
+        </table>
+        </div>`;
+    });
+  </script>
+</html>
