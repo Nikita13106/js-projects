@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="card">
+      <div class="search">
+        <input type="text" placeholder="Enter City Name" spellcheck="false" />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="error">
+        <p>Invalid city name</p>
+      </div>
+      <div class="weather">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/012/066/505/non_2x/sunny-and-rainy-day-weather-forecast-icon-meteorological-sign-3d-render-png.png"
+          class="weather-icon"
+        />
+        <h1 class="temp">22°C</h1>
+        <h2 class="city">New York</h2>
+        <div class="details">
+          <div class="col">
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/weather-forecast-18/40/Precipitation_Humidity_Waves_Water_Weather_Forecast-512.png"
+            />
+            <div>
+              <p class="humidity">50%</p>
+              <p>Humidity</p>
+            </div>
+          </div>
+          <div class="col">
+            <img
+              src="http://clipart-library.com/images_k/wind-clipart-transparent/wind-clipart-transparent-13.png"
+            />
+            <div>
+              <p class="wind">15km/h</p>
+              <p>Wind Speed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const apikey = "090c8b99aec1f41c7f8c301c2b67d97b";
+      const apiUrl =
+        "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+      let searchbox = document.querySelector(".search input");
+      let search = document.querySelector(".search button");
+      let weatherIcon = document.querySelector(".weather-icon");
+
+      async function checkWeather(city) {
+        const response = await fetch(apiUrl + city + `&appid=${apikey}`);
+        if (response.status == 404) {
+          document.querySelector(".error").style.display = "block";
+          document.querySelector(".weather").style.display = "none";
+        } else {
+          let data = await response.json();
+
+          document.querySelector(".temp").textContent =
+            Math.round(data.main.temp) + "°C";
+          document.querySelector(".city").textContent = data.name;
+          document.querySelector(".humidity").textContent =
+            data.main.humidity + "%";
+          document.querySelector(".wind").textContent =
+            data.wind.speed + "km/h";
+
+          if (data.weather[0].main == "Clouds") {
+            weatherIcon.src =
+              "https://cdn-icons-png.flaticon.com/512/4834/4834559.png";
+          } else if (data.weather[0].main == "Clear")
+            weatherIcon.src =
+              "https://cdn2.iconfinder.com/data/icons/weather-and-season-1/60/shiny-weather-clear-512.png";
+          else if (data.weather[0].main == "Rain")
+            weatherIcon.src =
+              "https://cdn3.iconfinder.com/data/icons/sunnyday-2/142/full_Cloudy_medium_rain-1024.png";
+          else if (data.weather[0].main == "Drizzle")
+            weatherIcon.src =
+              "https://static.vecteezy.com/system/resources/previews/012/066/505/non_2x/sunny-and-rainy-day-weather-forecast-icon-meteorological-sign-3d-render-png.png";
+          else if (data.weather[0].main == "Mist") {
+            weatherIcon.src =
+              "https://cdn1.iconfinder.com/data/icons/weather-forecast-meteorology-color-1/128/weather-foggy-sunny-1024.png";
+          }
+
+          document.querySelector(".weather").style.display = "block";
+          document.querySelector(".error").style.display = "none";
+        }
+      }
+      search.addEventListener("click", () => {
+        checkWeather(searchbox.value);
+      });
+    </script>
+  </body>
+</html>
